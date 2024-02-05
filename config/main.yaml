@@ -1,9 +1,8 @@
-defaults:
-  - process: process1
-  - model: model1
-  - _self_
-
 data:
-  raw: data/raw/sample.csv
-  processed: data/processed/processed.csv
-  final: data/final/final.csv
+  raw: data/raw/data1.csv
+  processed: data/processed/processed.pkl
+
+columns:
+  datetime:
+    - pickup_datetime
+    - dropoff_datetime
