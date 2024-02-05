@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import hydra
 import pandas as pd
 from omegaconf import DictConfig
@@ -9,12 +11,27 @@ def get_data(file_path: str, datetime_columns: list):
     return df
 
 
+def get_part_of_day(hour: int):
+    # Convert hour to datetime object
+    datetime_object = datetime.fromtimestamp(hour * 3600)
+
+    # Get the time of day based on the hour
+    if datetime_object.hour < 12:
+        return "morning"
+    elif datetime_object.hour < 17:
+        return "afternoon"
+    elif datetime_object.hour < 20:
+        return "evening"
+    else:
+        return "night"
+
+
 def extract_date_features(df: pd.DataFrame, datetime_column: str):
     print(f"Extract date features from {datetime_column}")
     prefix = datetime_column.split("_")[0]
-    df[f"{prefix}_Month"] = df[datetime_column].dt.month
     df[f"{prefix}_DayofMonth"] = df[datetime_column].dt.day
     df[f"{prefix}_Hour"] = df[datetime_column].dt.hour
+    df[f"{prefix}_PartofDay"] = df[f"{prefix}_Hour"].apply(get_part_of_day)
     df[f"{prefix}_DayofWeek"] = df[datetime_column].dt.dayofweek
     return df
 
