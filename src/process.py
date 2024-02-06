@@ -2,9 +2,12 @@ from datetime import datetime
 
 import hydra
 import pandas as pd
+from create_schema import raw_schema
 from omegaconf import DictConfig
+from pandera import check_output
 
 
+@check_output(raw_schema)
 def get_data(file_path: str, datetime_columns: list):
     print(f"Get data from {file_path}")
     df = pd.read_csv(file_path, parse_dates=datetime_columns)
