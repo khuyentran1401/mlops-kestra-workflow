@@ -94,7 +94,7 @@ outputs
 
 # Data
 data/*/*
-database
+move_data
 
 # Notebooks
 notebooks/*
