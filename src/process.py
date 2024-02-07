@@ -41,7 +41,7 @@ def extract_date_features(df: pd.DataFrame, datetime_column: str):
 
 def save_df(df: pd.DataFrame, filename: str):
     print(f"Save data to {filename}")
-    df.to_pickle(filename)
+    df.to_csv(filename, index=False)
     return df
 
 

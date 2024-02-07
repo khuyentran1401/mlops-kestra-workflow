@@ -1,6 +1,6 @@
 data:
   raw: data/raw/data1.csv
-  processed: data/processed/processed.pkl
+  processed: data/processed/processed.csv
 
 columns:
   datetime:
