@@ -60,6 +60,7 @@ services:
     ports:
       - "8080:8080"
       - "8081:8081"
+      - "8501:8501"
     depends_on:
       postgres:
         condition: service_started

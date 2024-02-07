@@ -6,3 +6,8 @@ columns:
   datetime:
     - pickup_datetime
     - dropoff_datetime
+
+s3:
+  bucket: yellow-taxi-01
+  file_name: data/raw/data1.csv
+  object_key: data1.csv
