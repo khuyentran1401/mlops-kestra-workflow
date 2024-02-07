@@ -8,6 +8,10 @@ columns:
     - dropoff_datetime
 
 s3:
-  bucket: yellow-taxi-01
-  file_name: data/raw/data1.csv
-  object_key: data1.csv
+  raw:
+    bucket: yellow-taxi-01
+    file_name: data/raw/data1.csv
+    object_key: data1.csv
+  processed:
+    bucket: yellow-taxi-01
+    object_key: processed.pkl

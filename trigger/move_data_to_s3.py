@@ -1,23 +1,14 @@
-import os
+import sys
+from pathlib import Path
 
-import boto3
 import hydra
-from dotenv import load_dotenv
 from omegaconf import DictConfig
 
-# Load environment variables from .env file
-load_dotenv()
+current_dir = Path(__file__).parent
+parent_dir = current_dir.parent
+sys.path.append(str(parent_dir))
 
-
-def get_s3_client():
-    aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
-    aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY_ID")
-    s3 = boto3.client(
-        "s3",
-        aws_access_key_id=aws_access_key_id,
-        aws_secret_access_key=aws_secret_access_key,
-    )
-    return s3
+from src.helpers import get_s3_client
 
 
 def upload_to_s3(s3, s3_config: DictConfig):
@@ -30,7 +21,7 @@ def upload_to_s3(s3, s3_config: DictConfig):
 @hydra.main(config_path="../config", config_name="main", version_base="1.2")
 def move_data_to_s3(config: DictConfig):
     s3 = get_s3_client()
-    upload_to_s3(s3, config.s3)
+    upload_to_s3(s3, config.s3.raw)
 
 
 if __name__ == "__main__":
