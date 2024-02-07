@@ -60,6 +60,7 @@ target/
 
 # DotEnv configuration
 .env
+.env_encoded
 
 # Database
 *.db
