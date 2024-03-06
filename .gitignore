@@ -98,3 +98,6 @@ data/*/*
 
 # Notebooks
 notebooks/*
+
+# Model
+model/*

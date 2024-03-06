@@ -1,14 +1,23 @@
-import sys
-from pathlib import Path
+import os
 
+import boto3
 import hydra
+from dotenv import load_dotenv
 from omegaconf import DictConfig
 
-current_dir = Path(__file__).parent
-parent_dir = current_dir.parent
-sys.path.append(str(parent_dir))
+# Load environment variables from .env file
+load_dotenv()
 
-from src.helpers import get_s3_client
+
+def get_s3_client():
+    aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
+    aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY_ID")
+    s3 = boto3.client(
+        "s3",
+        aws_access_key_id=aws_access_key_id,
+        aws_secret_access_key=aws_secret_access_key,
+    )
+    return s3
 
 
 def upload_to_s3(s3, s3_config: DictConfig):

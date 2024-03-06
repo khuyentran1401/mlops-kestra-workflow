@@ -1,57 +1,43 @@
-from datetime import datetime
+import warnings
+from typing import Tuple
 
 import hydra
 import pandas as pd
-from create_schema import raw_schema
+from helpers import load_data, save_data
 from omegaconf import DictConfig
-from pandera import check_output
+from sklearn.model_selection import train_test_split
+
+# Ignore all future warnings
+warnings.simplefilter(action="ignore", category=FutureWarning)
 
 
-@check_output(raw_schema)
-def get_data(file_path: str, datetime_columns: list):
-    print(f"Get data from {file_path}")
-    df = pd.read_csv(file_path, parse_dates=datetime_columns)
-    return df
+def get_X_y(data: pd.DataFrame, feature: str) -> Tuple[pd.DataFrame, pd.Series]:
+    """Split data into X and y"""
+    X = data.drop(columns=feature)
+    y = data[feature]
+    return X, y
 
 
-def get_part_of_day(hour: int):
-    # Convert hour to datetime object
-    datetime_object = datetime.fromtimestamp(hour * 3600)
-
-    # Get the time of day based on the hour
-    if datetime_object.hour < 12:
-        return "morning"
-    elif datetime_object.hour < 17:
-        return "afternoon"
-    elif datetime_object.hour < 20:
-        return "evening"
-    else:
-        return "night"
-
-
-def extract_date_features(df: pd.DataFrame, datetime_column: str):
-    print(f"Extract date features from {datetime_column}")
-    prefix = datetime_column.split("_")[0]
-    df[f"{prefix}_DayofMonth"] = df[datetime_column].dt.day
-    df[f"{prefix}_Hour"] = df[datetime_column].dt.hour
-    df[f"{prefix}_PartofDay"] = df[f"{prefix}_Hour"].apply(get_part_of_day)
-    df[f"{prefix}_DayofWeek"] = df[datetime_column].dt.dayofweek
-    return df
-
-
-def save_df(df: pd.DataFrame, filename: str):
-    print(f"Save data to {filename}")
-    df.to_csv(filename, index=False)
-    return df
+def split_train_test(X: pd.DataFrame, y: pd.Series, test_size: float) -> dict:
+    """Split data into train and test sets"""
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=test_size, random_state=42
+    )
+    return {
+        "X_train": X_train,
+        "X_test": X_test,
+        "y_train": y_train,
+        "y_test": y_test,
+    }
 
 
 @hydra.main(config_path="../config", config_name="main", version_base="1.2")
 def process_data(config: DictConfig):
-    datetime_columns = list(config.columns.datetime)
-    df = get_data(config.data.raw, datetime_columns=datetime_columns)
-    for column in datetime_columns:
-        df = extract_date_features(df, datetime_column=column)
-    save_df(df, config.data.processed)
+    df = load_data(config.data.raw)
+    X, y = get_X_y(df, config.process.feature)
+    splitted_datasets = split_train_test(X, y, config.process.test_size)
+    for name, data in splitted_datasets.items():
+        save_data(data, config.data.intermediate, name)
 
 
 if __name__ == "__main__":
