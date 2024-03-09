@@ -30,11 +30,13 @@ train:
     cv: 2
     scoring: accuracy
     verbose: 3
+    
 s3:
   raw:
     bucket: winequality-red
-    file_name: data/raw/data2.csv
-    object_key: data2.csv
+    file_name: data1.csv
+    object_key: new/${s3.raw.file_name}
+    local_path: data/raw/${s3.raw.file_name}
   processed:
-    bucket: yellow-taxi-01
+    bucket: winequality-red
     object_key: processed.pkl

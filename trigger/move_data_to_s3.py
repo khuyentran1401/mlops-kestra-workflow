@@ -21,10 +21,10 @@ def get_s3_client():
 
 
 def upload_to_s3(s3, s3_config: DictConfig):
-    with open(s3_config.file_name, "rb") as file:
+    with open(s3_config.local_path, "rb") as file:
         s3.put_object(Body=file, Bucket=s3_config.bucket, Key=s3_config.object_key)
 
-    print(f"File {s3_config.file_name} uploaded to S3 bucket {s3_config.bucket}")
+    print(f"File {s3_config.local_path} uploaded to S3 bucket {s3_config.bucket}")
 
 
 @hydra.main(config_path="../config", config_name="main", version_base="1.2")
