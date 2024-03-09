@@ -1,6 +1,15 @@
 data:
-  raw: data/raw/winequality-red.csv
-  intermediate: data/intermediate
+  raw:
+    dir: data/raw
+    name: data2
+    path: ${data.raw.dir}/${data.raw.name}.csv
+  merged:
+    dir: data/merged
+    name: merged.pkl
+    path: ${data.merged.dir}/${data.merged.name}
+  processed:
+    dir: data/processed
+
 model: model/svm.pkl
 process:
   feature: quality
@@ -8,16 +17,24 @@ process:
 train:
   hyperparameters:
     svm__kernel:
-    - linear
+      - linear
     svm__C:
-    - 0.1
-    - 1
-    - 10
+      - 0.1
+      - 1
+      - 10
     svm__gamma:
-    - 0.1
-    - 1
-    - 10
+      - 0.1
+      - 1
+      - 10
   grid_search:
     cv: 2
     scoring: accuracy
     verbose: 3
+s3:
+  raw:
+    bucket: winequality-red
+    file_name: data/raw/data2.csv
+    object_key: data2.csv
+  processed:
+    bucket: yellow-taxi-01
+    object_key: processed.pkl

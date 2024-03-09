@@ -37,8 +37,8 @@ def save_model(model, path: str):
 @hydra.main(config_path="../config", config_name="main", version_base="1.2")
 def train(config: DictConfig) -> None:
     """Train model and save it"""
-    X_train = load_data(f"{config.data.intermediate}/X_train.pkl")
-    y_train = load_data(f"{config.data.intermediate}/y_train.pkl")
+    X_train = load_data(f"{config.data.processed.dir}/X_train.pkl")
+    y_train = load_data(f"{config.data.processed.dir}/y_train.pkl")
     pipeline = create_pipeline()
     grid_search = train_model(
         X_train,

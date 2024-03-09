@@ -95,9 +95,12 @@ outputs
 
 # Data
 data/*/*
+data/winequality-red.csv
 
 # Notebooks
 notebooks/*
 
 # Model
 model/*
+
+src/split_data.py

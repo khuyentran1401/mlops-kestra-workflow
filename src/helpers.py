@@ -16,8 +16,7 @@ def load_data(path: str, csv_delimeter=","):
     return df
 
 
-def save_data(df: pd.DataFrame, path: str, name: str):
+def save_data(df: pd.DataFrame, path: str):
     """Save data to path"""
-    path = f"{path}/{name}.pkl"
     Path(path).parent.mkdir(exist_ok=True)
     df.to_pickle(path)
