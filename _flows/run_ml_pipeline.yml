@@ -1,4 +1,4 @@
-id: run_ml-pipeline
+id: run_ml_pipeline
 namespace: dev
 tasks:
   - id: fileSystem
