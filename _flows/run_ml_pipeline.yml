@@ -9,23 +9,30 @@ tasks:
       - id: processData
         type: io.kestra.plugin.scripts.python.Commands
         inputFiles:
-          data/raw/new.csv: "{{ trigger.objects | jq('.[].uri') | first }}"
+          data/raw/new.csv: '{{ trigger.objects | jq(''.[].uri'') | first }}'
         docker:
           image: ghcr.io/kestra-io/pydata:latest
         beforeCommands:
           - pip install -r requirements.txt
         commands:
           - python src/merge_data.py data.raw.dir=data/raw
+      - id: downloadsOldData
+        type: io.kestra.plugin.aws.s3.Downloads
+        accessKeyId: '{{secret(''AWS_ACCESS_KEY_ID'')}}'
+        secretKeyId: '{{secret(''AWS_SECRET_ACCESS_KEY_ID'')}}'
+        region: us-east-2
+        bucket: winequality-red
+        key: old 
 triggers:
   - id: watch
     type: io.kestra.plugin.aws.s3.Trigger
-    interval: "PT1S"
-    accessKeyId: "{{secret('AWS_ACCESS_KEY_ID')}}"
-    secretKeyId: "{{secret('AWS_SECRET_ACCESS_KEY_ID')}}"
-    region: "us-east-2"
-    bucket: "winequality-red"
-    prefix: "new"
+    interval: PT1S
+    accessKeyId: '{{secret(''AWS_ACCESS_KEY_ID'')}}'
+    secretKeyId: '{{secret(''AWS_SECRET_ACCESS_KEY_ID'')}}'
+    region: us-east-2
+    bucket: winequality-red
+    prefix: new
     action: MOVE
-    moveTo: 
-      bucket: "winequality-red"
+    moveTo:
+      bucket: winequality-red
       key: old
