@@ -12,8 +12,11 @@ def get_files_in_a_directory(dir_path: str):
 
 
 def merge_files(csv_files: list):
-    print("Merging the following files:", ", ".join(csv_files))
-    dfs = [pd.read_csv(file) for file in csv_files]
+    print("Merging the following files:")
+    dfs = []
+    for file in csv_files:
+        print(file.name)
+        dfs.append(pd.read_csv(file))
     return pd.concat(dfs, ignore_index=True)
 
 
