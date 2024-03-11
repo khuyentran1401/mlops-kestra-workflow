@@ -16,6 +16,7 @@ tasks:
       - python src/download_files_from_s3.py
       - python src/merge_data.py
       - python src/process.py
+      - python src/train.py
 triggers:
   - id: watch
     type: io.kestra.plugin.aws.s3.Trigger
