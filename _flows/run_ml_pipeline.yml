@@ -16,8 +16,8 @@ tasks:
         action: NONE
       - id: mergeAndProcessData
         type: io.kestra.plugin.scripts.python.Commands
-        # inputFiles:
-        #   data/raw/new.csv: "{{ trigger.objects | jq('.[].uri') | first }}"
+        inputFiles:
+          data/raw/new.csv: "{{ trigger.objects | jq('.[].uri') | first }}"
         docker:
           image: ghcr.io/kestra-io/pydata:latest
         beforeCommands:
