@@ -6,8 +6,8 @@ tasks:
     namespaceFiles:
       enabled: true
     env:
-      AWS_ACCESS_KEY_ID: '{{secret(''AWS_ACCESS_KEY_ID'')}}'
-      AWS_SECRET_ACCESS_KEY: '{{secret(''AWS_SECRET_ACCESS_KEY'')}}'
+      AWS_ACCESS_KEY_ID: "{{secret('AWS_ACCESS_KEY_ID')}}"
+      AWS_SECRET_ACCESS_KEY: "{{secret('AWS_SECRET_ACCESS_KEY')}}"
     docker:
       image: ghcr.io/kestra-io/pydata:latest
     beforeCommands:
@@ -20,8 +20,8 @@ triggers:
   - id: watch
     type: io.kestra.plugin.aws.s3.Trigger
     interval: PT1S
-    accessKeyId: '{{secret(''AWS_ACCESS_KEY_ID'')}}'
-    secretKeyId: '{{secret(''AWS_SECRET_ACCESS_KEY'')}}'
+    accessKeyId: "{{secret('AWS_ACCESS_KEY_ID')}}"
+    secretKeyId: "{{secret('AWS_SECRET_ACCESS_KEY')}}"
     region: us-east-2
     bucket: winequality-red
     prefix: new
