@@ -1,6 +1,22 @@
+import os
+
+import boto3
 import hydra
-from helpers import get_s3_client
+from dotenv import load_dotenv
 from omegaconf import DictConfig
+
+load_dotenv()
+
+
+def get_s3_client():
+    aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
+    aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY")
+    s3 = boto3.client(
+        "s3",
+        aws_access_key_id=aws_access_key_id,
+        aws_secret_access_key=aws_secret_access_key,
+    )
+    return s3
 
 
 def upload_to_s3(s3, config: DictConfig):
