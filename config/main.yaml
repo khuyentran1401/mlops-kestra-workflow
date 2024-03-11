@@ -36,8 +36,8 @@ s3:
     new:
       bucket: winequality-red
       file_name: data2.csv
-      object_key: new/${s3.raw.file_name}
-      local_path: data/raw/${s3.raw.file_name}
+      object_key: new/${s3.raw.new.file_name}
+      local_path: data/raw/${s3.raw.new.file_name}
     old:
       bucket: winequality-red
       prefix: old 
