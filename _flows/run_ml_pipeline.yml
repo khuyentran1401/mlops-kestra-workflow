@@ -15,8 +15,8 @@ tasks:
     beforeCommands:
       - pip install -r requirements.txt
     commands:
-      - python src/download_s3_file.py
-      - python src/validate_data.py
+      - python src/validate_data.py data.raw.path=data/raw/new.csv
+      - python src/download_old_data.py
       - python src/merge_data.py
       - python src/process.py
 triggers:
