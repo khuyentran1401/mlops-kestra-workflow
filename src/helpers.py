@@ -3,9 +3,6 @@ from pathlib import Path
 
 import boto3
 import pandas as pd
-from dotenv import load_dotenv
-
-load_dotenv()
 
 
 def load_data(path: str, csv_delimeter=","):
