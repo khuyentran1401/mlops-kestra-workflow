@@ -3,12 +3,13 @@ from pathlib import Path
 import hydra
 import joblib
 import pandas as pd
-from helpers import load_data
 from omegaconf import DictConfig
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
+
+from src.helpers import load_data
 
 
 def create_pipeline() -> Pipeline:
@@ -37,6 +38,7 @@ def save_model(model, path: str):
 @hydra.main(config_path="../config", config_name="main", version_base="1.2")
 def train(config: DictConfig) -> None:
     """Train model and save it"""
+    print("Training the model...")
     X_train = load_data(f"{config.data.processed.dir}/X_train.pkl")
     y_train = load_data(f"{config.data.processed.dir}/y_train.pkl")
     pipeline = create_pipeline()

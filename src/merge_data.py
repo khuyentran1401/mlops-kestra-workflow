@@ -2,8 +2,9 @@ from pathlib import Path
 
 import hydra
 import pandas as pd
-from helpers import save_data
 from omegaconf import DictConfig
+
+from src.helpers import save_data
 
 
 def get_files_in_a_directory(dir_path: str):
@@ -12,6 +13,7 @@ def get_files_in_a_directory(dir_path: str):
 
 
 def merge_files(csv_files: list):
+    print("Merging the following files:", ", ".join(csv_files))
     dfs = [pd.read_csv(file) for file in csv_files]
     return pd.concat(dfs, ignore_index=True)
 

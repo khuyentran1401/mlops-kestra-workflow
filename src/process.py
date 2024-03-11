@@ -2,9 +2,10 @@ from typing import Tuple
 
 import hydra
 import pandas as pd
-from helpers import load_data, save_data
 from omegaconf import DictConfig
 from sklearn.model_selection import train_test_split
+
+from src.helpers import load_data, save_data
 
 
 def get_X_y(data: pd.DataFrame, feature: str) -> Tuple[pd.DataFrame, pd.Series]:
@@ -29,6 +30,7 @@ def split_train_test(X: pd.DataFrame, y: pd.Series, test_size: float) -> dict:
 
 @hydra.main(config_path="../config", config_name="main", version_base="1.2")
 def process_data(config: DictConfig):
+    print("Processing the data...")
     df = load_data(config.data.merged.path)
     X, y = get_X_y(df, config.process.feature)
     splitted_datasets = split_train_test(X, y, config.process.test_size)

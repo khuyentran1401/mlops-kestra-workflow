@@ -38,6 +38,7 @@ def download_data_from_s3(s3, config: DictConfig):
 
 @hydra.main(config_path="../config", config_name="main", version_base="1.2")
 def download_s3_file(config: DictConfig):
+    print("Downloading old data from S3...")
     s3 = get_s3_client()
     download_data_from_s3(s3, config.s3.raw.old)
 

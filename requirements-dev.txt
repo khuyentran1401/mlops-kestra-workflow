@@ -4,4 +4,3 @@ notebook>=6.4.10
 pytest>=6.2.5
 pre-commit>=2.17.0
 ipykernel>=6.28.0
-python-dotenv>=1.0.1
