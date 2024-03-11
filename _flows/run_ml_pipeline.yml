@@ -14,17 +14,17 @@ tasks:
         bucket: winequality-red
         prefix: old 
         action: NONE
-      # - id: mergeAndProcessData
-      #   type: io.kestra.plugin.scripts.python.Commands
-      #   inputFiles:
-      #     data/raw/new.csv: '{{ trigger.objects | jq(''.[].uri'') | first }}'
-      #   docker:
-      #     image: ghcr.io/kestra-io/pydata:latest
-      #   beforeCommands:
-      #     - pip install -r requirements.txt
-      #   commands:
-      #     - python src/merge_data.py data.raw.dir=data/raw
-      #     - python src/process.py data
+      - id: mergeAndProcessData
+        type: io.kestra.plugin.scripts.python.Commands
+        # inputFiles:
+        #   data/raw/new.csv: "{{ trigger.objects | jq('.[].uri') | first }}"
+        docker:
+          image: ghcr.io/kestra-io/pydata:latest
+        beforeCommands:
+          - pip install -r requirements.txt
+        commands:
+          - python src/merge_data.py data.raw.dir=data/raw
+          - python src/process.py data.processed.dir=data/processed
 triggers:
   - id: watch
     type: io.kestra.plugin.aws.s3.Trigger
