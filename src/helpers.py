@@ -1,6 +1,11 @@
+import os
 from pathlib import Path
 
+import boto3
 import pandas as pd
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def load_data(path: str, csv_delimeter=","):
@@ -20,3 +25,14 @@ def save_data(df: pd.DataFrame, path: str):
     """Save data to path"""
     Path(path).parent.mkdir(exist_ok=True)
     df.to_pickle(path)
+
+
+def get_s3_client():
+    aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
+    aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY_ID")
+    s3 = boto3.client(
+        "s3",
+        aws_access_key_id=aws_access_key_id,
+        aws_secret_access_key=aws_secret_access_key,
+    )
+    return s3
