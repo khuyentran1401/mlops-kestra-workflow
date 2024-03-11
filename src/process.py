@@ -2,10 +2,9 @@ from typing import Tuple
 
 import hydra
 import pandas as pd
+from helpers import load_data, save_data
 from omegaconf import DictConfig
 from sklearn.model_selection import train_test_split
-
-from src.helpers import load_data, save_data
 
 
 def get_X_y(data: pd.DataFrame, feature: str) -> Tuple[pd.DataFrame, pd.Series]:

@@ -3,13 +3,12 @@ from pathlib import Path
 import hydra
 import joblib
 import pandas as pd
+from helpers import load_data
 from omegaconf import DictConfig
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
-
-from src.helpers import load_data
 
 
 def create_pipeline() -> Pipeline:
