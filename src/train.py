@@ -48,7 +48,7 @@ def train(config: DictConfig) -> None:
         config.train.hyperparameters,
         config.train.grid_search,
     )
-    save_model(grid_search.best_estimator_, config.model)
+    save_model(grid_search.best_estimator_, config.model_path)
 
 
 if __name__ == "__main__":

@@ -9,8 +9,7 @@ data:
     path: ${data.merged.dir}/${data.merged.name}
   processed:
     dir: data/processed
-
-model: model/svm.pkl
+model_path: model/model.pkl
 process:
   feature: quality
   test_size: 0.2
