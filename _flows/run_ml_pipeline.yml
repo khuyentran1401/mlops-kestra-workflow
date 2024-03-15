@@ -22,7 +22,7 @@ tasks:
   - id: upload
     type: io.kestra.plugin.aws.s3.Upload
     accessKeyId: "{{secret('AWS_ACCESS_KEY_ID')}}"
-    secretKeyId: "{{secret('AWS_SECRET_ACCESS_KEY_ID')}}"
+    secretKeyId: "{{secret('AWS_SECRET_ACCESS_KEY')}}"
     region: us-east-2
     from: '{{outputs.runPythonCommands.uris["model/model.pkl"]}}'
     bucket: winequality-red
