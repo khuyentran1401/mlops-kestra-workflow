@@ -29,7 +29,6 @@ train:
     cv: 2
     scoring: accuracy
     verbose: 3
-    
 s3:
   raw:
     new:
