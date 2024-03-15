@@ -18,7 +18,7 @@ tasks:
       - python src/process.py
       - python src/train.py model_path=model/model.pkl
     outputFiles:
-      - "*.pickle"
+      - model/model.pkl
   - id: upload
     type: io.kestra.plugin.aws.s3.Upload
     accessKeyId: "{{secret('AWS_ACCESS_KEY_ID')}}"
