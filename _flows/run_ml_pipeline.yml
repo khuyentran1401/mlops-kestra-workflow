@@ -1,7 +1,7 @@
 id: run_ml_pipeline
 namespace: dev
 tasks:
-  - id: runPythonCommands
+  - id: run_python_commands 
     type: io.kestra.plugin.scripts.python.Commands
     namespaceFiles:
       enabled: true
