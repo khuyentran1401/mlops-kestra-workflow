@@ -24,7 +24,7 @@ tasks:
     accessKeyId: "{{secret('AWS_ACCESS_KEY_ID')}}"
     secretKeyId: "{{secret('AWS_SECRET_ACCESS_KEY')}}"
     region: us-east-2
-    from: '{{outputs.runPythonCommands.outputFiles["model/model.pkl"]}}'
+    from: '{{outputs.run_python_commands.outputFiles["model/model.pkl"]}}'
     bucket: winequality-red
     key: model.pkl
 triggers:
