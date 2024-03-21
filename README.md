@@ -4,7 +4,7 @@ Consider you’re an e-commerce platform aiming to enhance recommendation person
 
 To refine recommendations, you plan to retrain recommendation models using fresh customer interaction data whenever a new file is added to S3. But how exactly do you approach this task?
 
-This repo shows how you can set up an automated model training workflows triggered by S3 using Kestra.
+This repo shows how you can set up an automated model training workflows triggered by S3 using [Kestra](https://bit.ly/3TKxt3B).
 
 ## Set up
 1. Clone this repo:
