@@ -1,4 +1,10 @@
 # Setting Up Automated Model Training Workflows with AWS S3
+## Motivation
+Consider you’re an e-commerce platform aiming to enhance recommendation personalization. Your data resides in S3.
+
+To refine recommendations, you plan to retrain recommendation models using fresh customer interaction data whenever a new file is added to S3. But how exactly do you approach this task?
+
+This repo shows how you can set up an automated model training workflows triggered by S3 using Kestra.
 
 ## Set up
 1. Clone this repo:
@@ -35,4 +41,8 @@ docker-compose up -d
 ```
 Access the UI by opening the URL http://localhost:8080 in your browser.
 
+![](images/kestra.png)
 
+
+## Run the flow
+View [this article](https://medium.com/towards-data-science/setting-up-automated-model-training-workflows-with-aws-s3-cd0587b42f34) on how to execute the flow.
